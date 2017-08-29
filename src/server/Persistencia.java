@@ -16,23 +16,32 @@ import java.util.logging.Logger;
  * @author gkrause
  */
 public class Persistencia {
+    
+    public static void main(String[] args) throws FileNotFoundException {
+        System.out.println("executando código");
+        Persistencia x = new Persistencia();
+        x.lerArquivo();
+    }
 
-    public void lerArquivo() {
-        Scanner scanner = null;
-        try {
-            scanner = new Scanner(new FileReader("dados.txt"))
-                    .useDelimiter("\\||\\n");
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(Persistencia.class.getName()).
-                    log(Level.SEVERE, null, ex);
-        }
+    public void lerArquivo() throws FileNotFoundException {
+        Scanner scanner = new Scanner(new FileReader("dados.txt"))
+                       .useDelimiter(" ");
+        
         while (scanner.hasNext()) {
-            String nome = scanner.next();
-            String cidade = scanner.next();
-            String compras = scanner.next();
-            System.out.println(nome);
-            System.out.println(cidade);
-            System.out.println(compras);
+            String doenca = scanner.next();
+            String dor = scanner.next();
+            String febre = scanner.next();
+            String manchas = scanner.next();
+            String tosse = scanner.next();
+            String cansaco = scanner.next();
+            
+            System.out.println(doenca);
+            System.out.println(dor);
+            System.out.println(febre);
+            System.out.println(manchas);
+            System.out.println(tosse);
+            System.out.println(cansaco);
         }
+        scanner.close();
     }
 }
