@@ -10,16 +10,16 @@ package server;
  * @author gkrause
  */
 public class AgenteArquivador {
-    private boolean dor;
-    private boolean febre;
-    private boolean manchas;
-    private boolean tosse;
+    private boolean dor = false;
+    private boolean febre = false;
+    private boolean manchas = false;
+    private boolean tosse = false;
     
-    private boolean cansaco;
-    private boolean resfriado;
-    private boolean dengue;
-    private boolean pneumonia;
-    private boolean catapora;
+    private boolean cansaco = false;
+    private boolean resfriado = false;
+    private boolean dengue = false;
+    private boolean pneumonia = false;
+    private boolean catapora = false;
 
     public boolean isDor() {
         return dor;
