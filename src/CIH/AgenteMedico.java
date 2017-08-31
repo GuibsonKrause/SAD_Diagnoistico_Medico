@@ -3,18 +3,28 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package cliente;
+package CIH;
+
+import CDP.Doencas;
+import DAO.AgenteArquivador;
+import java.io.IOException;
+import java.net.DatagramPacket;
+import java.net.DatagramSocket;
+import java.net.InetAddress;
+import java.net.SocketException;
 
 /**
  *
  * @author gkrause
  */
-public class AgenteMedico extends javax.swing.JFrame {
+public class AgenteMedico extends javax.swing.JFrame
+{
 
     /**
      * Creates new form AgenteMedico
      */
-    public AgenteMedico() {
+    public AgenteMedico()
+    {
         initComponents();
     }
 
@@ -25,23 +35,24 @@ public class AgenteMedico extends javax.swing.JFrame {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+    private void initComponents()
+    {
 
         jComboBox1 = new javax.swing.JComboBox<>();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
-        jRadioButton3 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton4 = new javax.swing.JRadioButton();
-        jRadioButton5 = new javax.swing.JRadioButton();
+        rbtnManchas = new javax.swing.JRadioButton();
+        rbtnFebre = new javax.swing.JRadioButton();
+        rbtnDor = new javax.swing.JRadioButton();
+        rbtnTosse = new javax.swing.JRadioButton();
+        rbtnCansaco = new javax.swing.JRadioButton();
         jPanel3 = new javax.swing.JPanel();
-        jComboBox2 = new javax.swing.JComboBox<>();
-        jToggleButton1 = new javax.swing.JToggleButton();
-        jToggleButton2 = new javax.swing.JToggleButton();
+        cbDoenca = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextPane1 = new javax.swing.JTextPane();
+        txtDiagnostico = new javax.swing.JTextPane();
+        btnSolicitarAuxilio = new javax.swing.JButton();
+        btnRegistrar = new javax.swing.JButton();
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
@@ -52,20 +63,22 @@ public class AgenteMedico extends javax.swing.JFrame {
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Sintomas"));
 
-        jRadioButton3.setText("Manchas");
+        rbtnManchas.setText("Manchas");
 
-        jRadioButton2.setText("Febre");
+        rbtnFebre.setText("Febre");
 
-        jRadioButton1.setText("Dor");
-        jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton1ActionPerformed(evt);
+        rbtnDor.setText("Dor");
+        rbtnDor.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                rbtnDorActionPerformed(evt);
             }
         });
 
-        jRadioButton4.setText("Tosse");
+        rbtnTosse.setText("Tosse");
 
-        jRadioButton5.setText("Cansaço");
+        rbtnCansaco.setText("Cansaço");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -73,78 +86,87 @@ public class AgenteMedico extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jRadioButton1)
-                    .addComponent(jRadioButton2)
-                    .addComponent(jRadioButton3)
-                    .addComponent(jRadioButton4)
-                    .addComponent(jRadioButton5))
+                    .addComponent(rbtnDor)
+                    .addComponent(rbtnFebre)
+                    .addComponent(rbtnManchas)
+                    .addComponent(rbtnTosse)
+                    .addComponent(rbtnCansaco))
                 .addContainerGap(80, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(jRadioButton1)
+                .addComponent(rbtnDor)
                 .addGap(18, 18, 18)
-                .addComponent(jRadioButton2)
+                .addComponent(rbtnFebre)
                 .addGap(18, 18, 18)
-                .addComponent(jRadioButton3)
+                .addComponent(rbtnManchas)
                 .addGap(18, 18, 18)
-                .addComponent(jRadioButton4)
+                .addComponent(rbtnTosse)
                 .addGap(18, 18, 18)
-                .addComponent(jRadioButton5)
+                .addComponent(rbtnCansaco)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Doença"));
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Resfriado", "Dengue", "Pneumonia", "Catapora" }));
-
-        jToggleButton1.setText("Registrar");
-
-        jToggleButton2.setText("Solicitar Auxílio");
-        jToggleButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jToggleButton2ActionPerformed(evt);
-            }
-        });
+        cbDoenca.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Resfriado", "Dengue", "Pneumonia", "Catapora" }));
 
         jLabel1.setText("Diagnostico:");
 
-        jTextPane1.setEditable(false);
-        jScrollPane1.setViewportView(jTextPane1);
+        txtDiagnostico.setEditable(false);
+        jScrollPane1.setViewportView(txtDiagnostico);
+
+        btnSolicitarAuxilio.setText("Solicitar Auxílio");
+        btnSolicitarAuxilio.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                btnSolicitarAuxilioActionPerformed(evt);
+            }
+        });
+
+        btnRegistrar.setText("Registrar");
+        btnRegistrar.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                btnRegistrarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addComponent(cbDoenca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 147, Short.MAX_VALUE))
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addComponent(jLabel1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane1)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addContainerGap(48, Short.MAX_VALUE)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jToggleButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jToggleButton2))))
-                .addGap(64, 64, 64))
+                        .addComponent(jLabel1)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(27, 27, 27)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnSolicitarAuxilio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnRegistrar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jScrollPane1))))
+                .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(cbDoenca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(34, 34, 34)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
-                .addComponent(jToggleButton1)
+                .addComponent(btnRegistrar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jToggleButton2)
+                .addComponent(btnSolicitarAuxilio)
                 .addContainerGap())
         );
 
@@ -177,65 +199,128 @@ public class AgenteMedico extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
+    private void rbtnDorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtnDorActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jRadioButton1ActionPerformed
+    }//GEN-LAST:event_rbtnDorActionPerformed
 
-    private void jToggleButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton2ActionPerformed
+    private void btnSolicitarAuxilioActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnSolicitarAuxilioActionPerformed
+    {//GEN-HEADEREND:event_btnSolicitarAuxilioActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jToggleButton2ActionPerformed
+    }//GEN-LAST:event_btnSolicitarAuxilioActionPerformed
+
+    private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnRegistrarActionPerformed
+    {//GEN-HEADEREND:event_btnRegistrarActionPerformed
+        Doencas current = new Doencas();
+        current.setNomeD((String) cbDoenca.getSelectedItem());
+        sintomasSelec(current);
+        AgenteArquivador.WriteFile("data.txt", current);
+    }//GEN-LAST:event_btnRegistrarActionPerformed
 
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
+    public static void main(String args[])
+    {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+        try
+        {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels())
+            {
+                if ("Nimbus".equals(info.getName()))
+                {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex) {
+        } catch (ClassNotFoundException ex)
+        {
             java.util.logging.Logger.getLogger(AgenteMedico.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
+        } catch (InstantiationException ex)
+        {
             java.util.logging.Logger.getLogger(AgenteMedico.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
+        } catch (IllegalAccessException ex)
+        {
             java.util.logging.Logger.getLogger(AgenteMedico.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        } catch (javax.swing.UnsupportedLookAndFeelException ex)
+        {
             java.util.logging.Logger.getLogger(AgenteMedico.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
-        
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
+        java.awt.EventQueue.invokeLater(new Runnable()
+        {
+            public void run()
+            {
                 new AgenteMedico().setVisible(true);
             }
         });
+
     }
 
+    public void sintomasSelec(Doencas atual)
+    {
+        if (rbtnDor.isSelected())
+        {
+            atual.setDor("S");
+        } else
+        {
+            atual.setDor("N");
+        }
+
+        if (rbtnFebre.isSelected())
+        {
+            atual.setFebre("S");
+        } else
+        {
+            atual.setFebre("N");
+        }
+
+        if (rbtnManchas.isSelected())
+        {
+            atual.setManchas("S");
+        } else
+        {
+            atual.setManchas("N");
+        }
+
+        if (rbtnTosse.isSelected())
+        {
+            atual.setTosse("S");
+        } else
+        {
+            atual.setTosse("N");
+        }
+
+        if (rbtnCansaco.isSelected())
+        {
+            atual.setCansaco("S");
+        } else
+        {
+            atual.setCansaco("N");
+        }
+    }
+
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnRegistrar;
+    private javax.swing.JButton btnSolicitarAuxilio;
+    private javax.swing.JComboBox<String> cbDoenca;
     private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
-    private javax.swing.JRadioButton jRadioButton3;
-    private javax.swing.JRadioButton jRadioButton4;
-    private javax.swing.JRadioButton jRadioButton5;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextPane jTextPane1;
-    private javax.swing.JToggleButton jToggleButton1;
-    private javax.swing.JToggleButton jToggleButton2;
+    private javax.swing.JRadioButton rbtnCansaco;
+    private javax.swing.JRadioButton rbtnDor;
+    private javax.swing.JRadioButton rbtnFebre;
+    private javax.swing.JRadioButton rbtnManchas;
+    private javax.swing.JRadioButton rbtnTosse;
+    private javax.swing.JTextPane txtDiagnostico;
     // End of variables declaration//GEN-END:variables
 }
