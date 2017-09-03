@@ -20,3 +20,4 @@ catapora;N;N;S;N;S
 catapora;N;N;S;N;S 
 Dengue;S;S;S;S;N
 Pneumonia;S;N;S;N;S
+Catapora;S;S;S;N;N

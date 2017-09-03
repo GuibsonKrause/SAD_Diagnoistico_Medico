@@ -9,6 +9,31 @@ package CCI;
  *
  * @author gkrause
  */
-public class AgenteResfriado {
-    
+public class AgenteResfriado extends AgentePrincipal
+{
+
+    private char[] symptoms;
+
+    public double probabilidade()
+    {
+        double calculo = 0;
+
+        return calculo;
+    }
+
+    public AgenteResfriado()
+    {
+
+    }
+
+    public char[] getSymptoms()
+    {
+        return symptoms;
+    }
+
+    public void setSymptoms(char[] symptoms)
+    {
+        this.symptoms = symptoms;
+    }
+
 }
