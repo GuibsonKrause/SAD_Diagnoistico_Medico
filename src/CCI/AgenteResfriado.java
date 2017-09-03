@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package CCI;
 
 /**
@@ -14,11 +9,10 @@ public class AgenteResfriado extends AgentePrincipal
 
     private char[] symptoms;
 
-    public double probabilidade()
+    public double probability()
     {
-        double calculo = 0;
-
-        return calculo;
+        double calculation = 0;
+        return calculation;
     }
 
     public AgenteResfriado()

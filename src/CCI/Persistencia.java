@@ -15,9 +15,6 @@ import java.util.ArrayList;
  */
 public class Persistencia
 {
-
-    private static Doencas aux;
-
     public static ArrayList<Doencas> ReadFile()
     {
         ArrayList<Doencas> table = new ArrayList<>();

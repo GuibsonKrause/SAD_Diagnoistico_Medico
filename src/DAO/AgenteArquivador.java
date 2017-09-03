@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package DAO;
 
 import CCI.Persistencia;
@@ -27,8 +22,7 @@ public class AgenteArquivador
         this.setDoencas(Persistencia.ReadFile()); // Adiciona as doenças do arquivo na lista        
         this.auxSintomas = new int[5];
         
-        for (int i = 0; i < 5; i++) this.auxSintomas[i] = 0;
-        
+        for (int i = 0; i < 5; i++) this.auxSintomas[i] = 0;        
     }
 
     public ArrayList<Doencas> getDoencas()
@@ -49,9 +43,7 @@ public class AgenteArquivador
     public void setAuxSintomas(int[] auxSintomas)
     {
         this.auxSintomas = auxSintomas;
-    }
-    
-    
+    }  
     
     public static void WriteFile(String dataFile, Doencas doencas)
     {
@@ -67,7 +59,6 @@ public class AgenteArquivador
             file.flush();// Limpa o BufferedWriter
         } catch (IOException ioe)
         {
-            ioe.printStackTrace();
         } finally
         {
             if (file != null)

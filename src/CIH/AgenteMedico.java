@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package CIH;
 
 import CDP.Doencas;
@@ -20,8 +15,12 @@ import java.net.UnknownHostException;
  */
 public class AgenteMedico extends javax.swing.JFrame
 {
+
+    private static final int port = 6789;
+
     public AgenteMedico()
     {
+        this.setLocationRelativeTo(null);
         initComponents();
     }
 
@@ -97,7 +96,7 @@ public class AgenteMedico extends javax.swing.JFrame
                 .addComponent(rbtnTosse)
                 .addGap(18, 18, 18)
                 .addComponent(rbtnCansaco)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Doença"));
@@ -154,8 +153,8 @@ public class AgenteMedico extends javax.swing.JFrame
                 .addGap(34, 34, 34)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnRegistrar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnSolicitarAuxilio)
@@ -201,9 +200,9 @@ public class AgenteMedico extends javax.swing.JFrame
         Doencas current = new Doencas();
         symptomsSelec(current);
         String symptoms = current.getDor() + ";" + current.getFebre() + ";"
-                + current.getManchas()     + ";" + current.getTosse() + ";"
+                + current.getManchas() + ";" + current.getTosse() + ";"
                 + current.getCansaco();
-        messageForServer(symptoms);
+        messageServer(symptoms);
     }//GEN-LAST:event_btnSolicitarAuxilioActionPerformed
 
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnRegistrarActionPerformed
@@ -229,20 +228,15 @@ public class AgenteMedico extends javax.swing.JFrame
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex)
+        } catch (ClassNotFoundException
+                | InstantiationException
+                | IllegalAccessException
+                | javax.swing.UnsupportedLookAndFeelException ex)
         {
-            java.util.logging.Logger.getLogger(AgenteMedico.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex)
-        {
-            java.util.logging.Logger.getLogger(AgenteMedico.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex)
-        {
-            java.util.logging.Logger.getLogger(AgenteMedico.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex)
-        {
-            java.util.logging.Logger.getLogger(AgenteMedico.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AgenteMedico.class.getName()).
+                    log(java.util.logging.Level.SEVERE, null, ex);
         }
-        
+
         java.awt.EventQueue.invokeLater(new Runnable()
         {
             public void run()
@@ -250,7 +244,49 @@ public class AgenteMedico extends javax.swing.JFrame
                 new AgenteMedico().setVisible(true);
             }
         });
+    }
 
+    public String getHost()
+    {
+        String hostName = "";
+        try
+        {
+            hostName = InetAddress.getLocalHost().getHostName();
+        } catch (UnknownHostException e)
+        {
+            System.out.println("Exception caught =" + e.getMessage());
+        }
+        return hostName;
+
+    }
+
+    public void messageServer(String message)
+    {
+        try (DatagramSocket aSocket = new DatagramSocket())
+        {
+            byte[] b = message.getBytes();
+            InetAddress aHost = InetAddress.getByName(getHost());
+            int serverPort = port;
+
+            DatagramPacket request = new DatagramPacket(b, message.length(),
+                    aHost, serverPort);
+
+            aSocket.send(request);
+
+            byte[] buffer = new byte[100];
+
+            DatagramPacket reply = new DatagramPacket(buffer, buffer.length);
+
+            aSocket.receive(reply);
+
+            txtDiagnostico.setText(new String(reply.getData()));
+        } catch (SocketException e)
+        {
+            System.out.println("Socket: " + e.getMessage());
+        } catch (IOException e)
+        {
+            System.out.println("Input Output: " + e.getMessage());
+        }
     }
 
     public void symptomsSelec(Doencas current)
@@ -293,48 +329,6 @@ public class AgenteMedico extends javax.swing.JFrame
         } else
         {
             current.setCansaco("N");
-        }
-    }
-
-    public String getHost()
-    {
-        String hostName = "";
-        try
-        {
-            hostName = InetAddress.getLocalHost().getHostName();
-        } catch (UnknownHostException e)
-        {
-            System.out.println("Exception caught =" + e.getMessage());
-        }
-        return hostName;
-
-    }
-
-    public void messageForServer(String message)
-    {
-        try (DatagramSocket aSocket = new DatagramSocket())
-        {
-            byte[] m = message.getBytes();
-            InetAddress aHost = InetAddress.getByName(getHost());
-            int serverPort = 6789;
-
-            DatagramPacket request = new DatagramPacket(m, message.length(), aHost, serverPort);
-
-            aSocket.send(request);
-
-            byte[] buffer = new byte[100];
-
-            DatagramPacket reply = new DatagramPacket(buffer, buffer.length);
-
-            aSocket.receive(reply);
-
-            txtDiagnostico.setText(new String(reply.getData()));
-        } catch (SocketException e)
-        {
-            System.out.println("Socket: " + e.getMessage());
-        } catch (IOException e)
-        {
-            System.out.println("Input Output: " + e.getMessage());
         }
     }
 
