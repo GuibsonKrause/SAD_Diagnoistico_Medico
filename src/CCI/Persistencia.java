@@ -15,6 +15,7 @@ import java.util.ArrayList;
  */
 public class Persistencia
 {
+
     public static ArrayList<Doencas> ReadFile()
     {
         ArrayList<Doencas> table = new ArrayList<>();
@@ -54,35 +55,4 @@ public class Persistencia
         }
         return null;
     }
-
-    public static void WriteFile(String dataFile, Doencas doencas)
-    {
-
-        BufferedWriter file = null;
-        try
-        {
-            file = new BufferedWriter(new FileWriter(dataFile, true));
-            file.write(doencas.getNomeD() + ";" + doencas.getDor() + ";"
-                     + doencas.getFebre() + ";"  + doencas.getManchas() + ";"
-                     + doencas.getTosse() + ";"  + doencas.getCansaco());
-            file.newLine();// Adiciona uma nova linha ao arquivo
-            file.flush();// Limpa o BufferedWriter
-        } catch (IOException ioe)
-        {
-            ioe.printStackTrace();
-        } finally
-        {
-            if (file != null)
-            {
-                try
-                {
-                    file.close();
-                } catch (IOException ioe2)
-                {
-
-                }
-            }
-        }
-    }
-
 }

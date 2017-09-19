@@ -191,12 +191,10 @@ public class AgenteMedico extends javax.swing.JFrame
     }// </editor-fold>//GEN-END:initComponents
 
     private void rbtnDorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtnDorActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_rbtnDorActionPerformed
 
     private void btnSolicitarAuxilioActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnSolicitarAuxilioActionPerformed
     {//GEN-HEADEREND:event_btnSolicitarAuxilioActionPerformed
-        // TODO add your handling code here:
         Doencas current = new Doencas();
         symptomsSelec(current);
         String symptoms = current.getDor() + ";" + current.getFebre() + ";"
@@ -213,9 +211,6 @@ public class AgenteMedico extends javax.swing.JFrame
         AgenteArquivador.WriteFile("data.txt", current);
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String args[])
     {
         try

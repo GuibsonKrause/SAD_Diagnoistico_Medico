@@ -6,6 +6,7 @@ package CDP;
  */
 public class Doencas
 {
+
     private String nomeD;
     private String dor;
     private String febre;
@@ -13,7 +14,7 @@ public class Doencas
     private String tosse;
     private String cansaco;
 
-    public Doencas(String nomeD, String dor, String frebre, 
+    public Doencas(String nomeD, String dor, String frebre,
             String manchas, String tosse, String cansaco)
     {
         this.nomeD = nomeD;
@@ -27,16 +28,6 @@ public class Doencas
     public Doencas()
     {
 
-    }
-    
-    public void ler()
-    {
-        System.out.println(this.nomeD);
-        System.out.println(this.dor);
-        System.out.println(this.febre);
-        System.out.println(this.manchas);
-        System.out.println(this.tosse);
-        System.out.println(this.cansaco);
     }
 
     public String getNomeD()
@@ -98,5 +89,5 @@ public class Doencas
     {
         this.cansaco = cansaco;
     }
-    
+
 }

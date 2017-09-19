@@ -6,5 +6,5 @@ package CCI;
  */
 public class AgenteDengue extends AgentePrincipal
 {
-   
+
 }

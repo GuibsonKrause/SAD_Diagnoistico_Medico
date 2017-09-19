@@ -13,16 +13,20 @@ import java.util.ArrayList;
  */
 public class AgenteArquivador
 {
+
     private ArrayList<Doencas> doencas;
     private int[] auxSintomas;
-    
+
     public AgenteArquivador()
     {
         this.doencas = new ArrayList<>();
         this.setDoencas(Persistencia.ReadFile()); // Adiciona as doenças do arquivo na lista        
         this.auxSintomas = new int[5];
-        
-        for (int i = 0; i < 5; i++) this.auxSintomas[i] = 0;        
+
+        for (int i = 0; i < 5; i++)
+        {
+            this.auxSintomas[i] = 0;
+        }
     }
 
     public ArrayList<Doencas> getDoencas()
@@ -43,8 +47,8 @@ public class AgenteArquivador
     public void setAuxSintomas(int[] auxSintomas)
     {
         this.auxSintomas = auxSintomas;
-    }  
-    
+    }
+
     public static void WriteFile(String dataFile, Doencas doencas)
     {
 
@@ -53,8 +57,8 @@ public class AgenteArquivador
         {
             file = new BufferedWriter(new FileWriter(dataFile, true));
             file.write(doencas.getNomeD() + ";" + doencas.getDor() + ";"
-                     + doencas.getFebre() + ";"  + doencas.getManchas() + ";"
-                     + doencas.getTosse() + ";"  + doencas.getCansaco());
+                    + doencas.getFebre() + ";" + doencas.getManchas() + ";"
+                    + doencas.getTosse() + ";" + doencas.getCansaco());
             file.newLine();// Adiciona uma nova linha ao arquivo
             file.flush();// Limpa o BufferedWriter
         } catch (IOException ioe)

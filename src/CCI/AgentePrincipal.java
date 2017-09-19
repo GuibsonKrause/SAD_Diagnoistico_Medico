@@ -9,6 +9,7 @@ import DAO.AgenteArquivador;
  */
 public class AgentePrincipal
 {
+
     public static double occurrenceCount(AgenteArquivador arquivador,
             String nomeD, String[] sintDoenca)
     {
@@ -141,7 +142,7 @@ public class AgentePrincipal
                     / ((double) vetSintomas[j]
                     / arquivador.getDoencas().size());
         }
-        
+
         return probability;
     }
 }
